@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+ <h1>Sheldon's stock price subscription</h1>
+ <h3>Below are the subscriptions </h3>
+ <table class="table">
+     <thead>
+         <tr>
+          <th scope="col">Symbol</th>
+          <th scope="col">Price</th>
+        </tr>
+     </thead>
+     <tbody>
+       {% for symbol in symbols %}
+         <tr>
+             <td>{{symbol.ticker}}</td>
+             <td>{{symbol.price}}</td>
+         </tr>
+     {% endfor %}
+     </tbody>
+ </table>
+</body>
+</html>

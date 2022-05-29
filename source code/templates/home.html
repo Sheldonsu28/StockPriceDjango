@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+{% if user.is_authenticated %}
+ <h1>Hi {{ user.username }}!</h1>
+ <h3>Below are the subscriptions </h3>
+ <table class="table">
+     <thead>
+         <tr>
+          <th scope="col">Symbol</th>
+          <th scope="col">Price</th>
+          <th scope="col">Action</th>
+        </tr>
+     </thead>
+     <tbody>
+       {% for symbol in symbols %}
+         <tr>
+             <td>{{symbol.ticker}}</td>
+             <td>{{symbol.price}}</td>
+             <td><a href="/stock/unsubscribe_stocks/{{ symbol.ticker }}">Unsubscribe</a></td>
+         </tr>
+     {% endfor %}
+     </tbody>
+ </table>
+
+<a href="/stock/subscribe_stocks">Click here to subscribe to new stocks</a>
+
+<a href="/users/logout">Log out</a>
+
+{% else %}
+  <p>You are not logged in</p>
+  <a href="{% url 'login' %}">Log In</a>
+{% endif %}
+{% endblock %}
