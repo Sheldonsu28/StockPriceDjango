@@ -9,17 +9,22 @@
  <table class="table">
      <thead>
          <tr>
-          <th scope="col">Symbol</th>
-          <th scope="col">Price</th>
-          <th scope="col">Action</th>
+             <th scope="col">Symbol</th>
+             <th scope="col">Email</th>
+             <th scope="col">Price</th>
+             <th scope="col">Actions</th>
         </tr>
      </thead>
      <tbody>
-       {% for symbol in symbols %}
+       {% for subscription in symbols %}
          <tr>
-             <td>{{symbol.ticker}}</td>
-             <td>{{symbol.price}}</td>
-             <td><a href="/stock/unsubscribe_stocks/{{ symbol.ticker }}">Unsubscribe</a></td>
+             <td>{{subscription.ticker}}</td>
+             <td>{{user.email}}</td>
+             <td>{{subscription.price}}</td>
+             <td>
+                 <a href="/stock/unsubscribe_stocks/{{ subscription.ticker }}">Unsubscribe</a> or
+                 <a href="/mail/send_mail/{{ subscription.ticker }}">Send now</a>
+             </td>
          </tr>
      {% endfor %}
      </tbody>

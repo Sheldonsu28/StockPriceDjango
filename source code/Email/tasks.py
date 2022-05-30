@@ -9,8 +9,8 @@ from celery.utils.log import get_task_logger
 logger = get_task_logger(__name__)
 
 
-def obtain_subscriptions():
-    subscriptions = Subscription.objects.all()
+def obtain_subscriptions(target=None):
+    subscriptions = Subscription.objects.all() if target is None else target
     symbol_set = set()
     user_table = {}
 
@@ -35,12 +35,10 @@ def obtain_subscriptions():
 
 
 @shared_task
-def send_email():
-    logger.info('Start!')
-    print('start')
-    user_info = obtain_subscriptions()
+def send_email(target=None):
+    user_info = obtain_subscriptions(target)
     title = "Your hourly stock price update from Sheldon's Stock Price Subscription"
-    sender_email = "placeholder"
+    sender_email = "sheldonsu28@outlook.com"
 
     for email in user_info.keys():
         target_user = user_info[email]
